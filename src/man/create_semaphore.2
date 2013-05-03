@@ -1,0 +1,58 @@
+.\" Tushar Sharma
+.\"
+.TH CREATE_SEMAPHORE 2 "March 30, 2013"
+.UC
+.SH NAME
+CREATE SEMAPHORE \- create and close a semaphore
+.SH SYNOPSIS
+.nf
+.ft B
+#include "mysemaphore.h"
+
+int create_semaphore(int, int, int)
+.ft R
+.fi
+.SH DESCRIPTION
+.de SP
+.if t .sp 0.4
+.if n .sp
+..
+.B CREATE_SEMAPHORE 
+causes creation of a new semaphore. Also used to close the semaphore.
+The new process could also use it to inherit the semaphore of the 
+parent process.
+.RS
+.SP
+Descriptor is passed as the first argument. 
+.P
+1 is passed as second argument to create a new semaphore. 
+Or 0 is passed as second argument to inherit a  newly created semaphore. 
+.P
+0 is passed as  third argument to not close the semaphore.
+1 is passed as third argument to close the semaphore. 
+
+.SH "RETURN VALUE
+Upon successful completion, \fBcreate_semaphore\fP returns a positive value
+to the calling process 
+Otherwise, a value of \-1 is returned
+to the calling process, no semaphore is created.
+.SH ERRORS
+.B CREATE SEMAPHORE 
+will fail and no new semaphore will be created if one of the 
+following are true:
+.TP 15
+[EAGAIN]
+The system-imposed limit on the total
+number of processes under execution would be exceeded.
+This limit is configuration-dependent.
+(The kernel variable NR_PROCS in <minix/config.h> (Minix), or
+<minix/const.h> (Minix-vmd).)
+.TP 15
+[ENOMEM]
+There is insufficient (virtual) memory for the new process.
+.SH AUTHOR
+Tushar Sharma (tushar.sharma@ufl.edu)
+.SH "SEE ALSO"
+.BR up_semaphore (2),
+.BR wait (2).
+.BR fork (2).

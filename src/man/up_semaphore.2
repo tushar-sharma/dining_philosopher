@@ -1,0 +1,56 @@
+.\" Tushar Sharma
+.\"
+.TH UP_SEMAPHORE 2 "March 30, 2013"
+.UC
+.SH NAME
+UP SEMAPHORE \- Up and Down a semaphore
+.SH SYNOPSIS
+.nf
+.ft B
+#include "mysemaphore.h"
+
+int up_semaphore(int, int)
+.ft R
+.fi
+.SH DESCRIPTION
+.de SP
+.if t .sp 0.4
+.if n .sp
+..
+.B UP_SEMAPHORE 
+causes down (also called P) operation on semaphore. Also used to perform up operation on semaphore (also called V).
+.SP
+The up operation increment the value of semaphore. One of the process, if waiting on it, is chosen at random and allowed the down operation. 
+.SP
+The down operation decreament the value of semaphore if its value is greater than zero. 
+.RS
+.SP
+Descriptor is passed as first argument. 
+.SP
+1 is passed as second argument to perform up operation. Or 0 is passed as second argument to perform down operation.
+.RE
+.SH "RETURN VALUE
+Upon successful completion, \fBup_semaphore\fP returns a positive value
+to the calling process 
+Otherwise, a value of \-1 is returned
+to the calling process, no operation is performed.
+.SH ERRORS
+.B UP SEMAPHORE 
+will fail and no child process will be created if one or more of the
+following are true:
+.TP 15
+[EAGAIN]
+The system-imposed limit on the total
+number of processes under execution would be exceeded.
+This limit is configuration-dependent.
+(The kernel variable NR_PROCS in <minix/config.h> (Minix), or
+<minix/const.h> (Minix-vmd).)
+.TP 15
+[ENOMEM]
+There is insufficient (virtual) memory for the new process.
+.SH AUTHOR
+Tushar Sharma (tushar.sharma@ufl.edu)
+.SH "SEE ALSO"
+.BR create_semaphore (2),
+.BR wait (2).
+.BR fork (2).

@@ -1,0 +1,69 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+|                    Project_2 Documentation              |
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+                   -***Objective***-
+
+Implement binary semaphores in Minix 3.  You will add four new system calls 
+to Minix 3, along with library functions that allow them to be called 
+conveniently from a C program. You will also write two C programs that 
+exercise and demonstrate semaphore operation. 
+Demonstrate the system call by building your modified Minix 3 with the new
+system calls, compiling your demo programs, then running the demo programs on 
+your modified Minix 3. 
+
+                   -***Implementation***-
+
+1) Firstly declare two library procedure inside the file /usr/src/include/unistd.h.
+
+   ********************************
+   int create_semaphore (int, int, int);
+   ********************************
+
+
+   ***************************
+   int up_semaphore(int, int);
+   ***************************
+
+2) Now declare the definition of the function in the file mysemaphore.h which is to created inside the 
+directory of /usr/src/include
+
+
+ Here symbolic constants like INHERIT, NOT_INHERIT are passed as argument. See man pages for details. 
+
+
+
+3) Now assign call number to the system call in the file /usr/src/include/minix/callnr.h
+
+    ****************************
+    # define CREATE_SEMAPHORE 56
+    ****************************
+
+
+    ************************
+    # define UP_SEMAPHORE 58
+    ************************
+
+4) Now register the system call in /usr/src/servers/pm/proto.h
+
+   ******************************
+   int do_create_semaphore(void);
+   int do_up_semaphore(void);
+   ******************************
+
+5) Also register it in /usr/src/servers/pm/table.c
+
+   ***********************************************
+   int do_create_semaphore,	/* 56 = unused	*/
+   int do_up_semaphore,	/* 58 = unused	*/
+   ***********************************************
+
+6) Now to handle the system call, include the definition in /usr/src/servers/pm/misc.c
+
+7) Make changes in main.c to initialize the Semaphore structure.
+
+8) Make changes in forkexit.c for inheriting semaphore.
+
+9) Create a 'c' program to create semaphore and perform various operations
+
+10) Implement a 'c' program to test Dining philospher problem. 
