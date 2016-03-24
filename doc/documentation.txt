@@ -1,20 +1,11 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-|                    Project_2 Documentation              |
+|                    Implementation                       |
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-                   -***Objective***-
+-*** I made the following changes to the Minix source code  ***- 
 
-Implement binary semaphores in Minix 3.  You will add four new system calls 
-to Minix 3, along with library functions that allow them to be called 
-conveniently from a C program. You will also write two C programs that 
-exercise and demonstrate semaphore operation. 
-Demonstrate the system call by building your modified Minix 3 with the new
-system calls, compiling your demo programs, then running the demo programs on 
-your modified Minix 3. 
 
-                   -***Implementation***-
-
-1) Firstly declare two library procedure inside the file /usr/src/include/unistd.h.
+1) Firstly I declared two library procedure inside the file /usr/src/include/unistd.h.
 
    ********************************
    int create_semaphore (int, int, int);
