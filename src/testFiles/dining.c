@@ -11,25 +11,36 @@
 
 #define NUM_PHILOSOPHERS 3  //number of philosopher
 #define MAX_TIME 10
-/*#define THINKING 0
-#define HUNGRY 1 
-#define EATING 2 
-*/
 
+/*
+THINKING is 0
+HUNGRY is 1 
+EATING is 2 
+*/
 typedef enum {THINKING, HUNGRY, EATING} phil_state;
 
 phil_state state[NUM_PHILOSOPHERS];
 
+/* 
+ * think for random time
+ */
 void think(void)
 {
     sleep(rand() % 11 + 5); 
 }
 
+/* 
+ * eat for random time
+ */
 void eat(void)
 {
     sleep(rand() % 3 + 1);
 }
 
+/* 
+ * check if the process is Hungry (need resource)
+ * and its neighbours are not EATING (using resources) 
+ */
 void test(int i)
 {
     if (state[i] == HUNGRY && state[LEFT] != EATING && state[RIGHT] != EATING) {
@@ -38,6 +49,10 @@ void test(int i)
     }
 }
 
+/* 
+ * If a process doesn't have its neighbours using forks (or resources)
+ * then aquire a semaphore and use resource
+ */
 void take_forks(int id) 
 { 
     up_semaphore(testmtx, SEM_DOWN);
@@ -50,6 +65,9 @@ void take_forks(int id)
     up_semaphore(statemtx, SEM_DOWN);
 }
 
+/* 
+ * After a process is done executing, it can release resources and lock
+ */
 void put_forks(int i) 
 {
     state[i] = THINKING;
@@ -59,6 +77,9 @@ void put_forks(int i)
     up_semaphore(i, SEM_UP);
 }
 
+/* 
+ * it randomly schedules different philosophers 
+ */
 void philosopher()
 {
     int id;

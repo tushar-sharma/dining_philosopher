@@ -4,7 +4,7 @@ program1:
 	clang test.c -o test
 
 program2:
-	clang ex1.c -o ex1 
+	clang test_dining.c -o test_dining
 
 clean:	clean1 clean2
 
@@ -12,6 +12,6 @@ clean1:
 	rm test
 
 clean2:
-	rm ex1
+	rm test_dining
 
 

@@ -4,6 +4,10 @@
 #include <sys/wait.h>
 #define DESC 2 
 
+/* 
+ * test program
+ * checking semaphore behaviour
+ */
 int main(int argc, char **argv)
 {
     int semid, status;
@@ -11,7 +15,7 @@ int main(int argc, char **argv)
     printf("%s\n", argv[1]);
 
     //down sempahore
-   wait((int *)up_semaphore(DESC, SEM_DOWN));
+    wait((int *)up_semaphore(DESC, SEM_DOWN));
 
     sleep(3);
     //up sempahore
@@ -27,10 +31,5 @@ int main(int argc, char **argv)
 	exit(EXIT_FAILURE);
     }
 
-
- /*   if ((semid = up_semaphore(SEM_DOWN)) == -1 ){
-         perror("down semaphore");
-	 exit(EXIT_FAILURE);
-    }*/
     return 0;
 }

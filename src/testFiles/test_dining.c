@@ -5,6 +5,7 @@
 #include "mysemaphore.h"
 #define DESC 2 
 
+/* Checking dining philsopher */ 
 int main(void)
 {
     int semid, status, foo, bar; 
@@ -71,17 +72,6 @@ int main(void)
              exit(EXIT_SUCCESS);
 
   	 default:
-             /*if (waitpid(pid2, &status, 0) < 0) {
-                 perror("waitpid");
-	         exit(EXIT_FAILURE);
-	     }
-             
-	     if (waitpid(pid1, &status, 0) < 0) {
-                 perror("waitpid");
-	         exit(EXIT_FAILURE);
-	     }
-
-             */
              if((semid = create_semaphore(DESC, NOT_INHERIT, SEM_CLOSE)) == -1) {
                  perror("unable to close semaphore");
                  exit(-1); 
